@@ -1,6 +1,9 @@
-from container import Container, NormalContainer, HeavyContainer, RefrigeratedContainer, LiquidContainer
-from station import Station
+import sys
+sys.dont_write_bytecode = True
 from freightcar import FreightCar
+from station import Station
+from container import Container, NormalContainer, HeavyContainer, RefrigeratedContainer, LiquidContainer
+
 
 
 class Main():
