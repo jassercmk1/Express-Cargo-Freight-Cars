@@ -8,7 +8,7 @@ class Station:
         self.current = []
 
     def __str__(self) -> str:
-        return f"Station :\n[ ID : {self.ID}\nX : {self.X}\nY={self.Y} ]"
+        return f"Station :\n[ ID : {self.ID}\n X : {self.X}\n Y : {self.Y} ]"
 
     def create_station(station_id: int, x: float, y: float):
         station = Station(station_id, x, y)
