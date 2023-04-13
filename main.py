@@ -1,5 +1,5 @@
 # The starting code with sys and ends with True.
-# is for preventing the generation of bytecode files.
+# is for preventing the generation of bytecode files like __pycache__.
 import sys
 sys.dont_write_bytecode = True
 from container import Container, NormalContainer, HeavyContainer, RefrigeratedContainer, LiquidContainer
@@ -10,18 +10,21 @@ from freightcar import FreightCar
 class Main():
     # Test Case 1
     print("|=============== Test Case 1 ===============|")
-    c1 = Container(1, 500, 'NormalContainer', 0)
-    c2 = Container(2, 3500, 'RefrigeratedContainer', 1)
+    c1 = Container(0, 500, 'NormalContainer')
+    c2 = Container(1, 3500, 'RefrigeratedContainer')
     print(c1)
     print(c2)
+
     # Test Case 2
     print("|=============== Test Case 2 ===============|")
     station = Station(0, 'Station_0', [])
     fc = FreightCar(1, station, 10000, 10, 5, 3, 4, 50.0)
     print(str(fc))
+
     # Test Case 3
     print("|=============== Test Case 3 ===============|")
-    print(Station.create_station(3, 40.0, 50.0))
+    print(Station.create_station(0, 40.0, 50.0))
+
     # Test Case 4
     print("|=============== Test Case 4 ===============|")
     Freight_Car = FreightCar(0, Station(
@@ -43,6 +46,7 @@ class Main():
         print(container)
     total_weight = sum(container.weight for container in current_containers)
     print("Total weight of containers in freight car:", total_weight)
+
     # Test Case 5
     print("|================ Test Case 5 ===============|")
 
@@ -55,17 +59,29 @@ class Main():
 
     freight_car0.unload_container(1, station3)
     print(freight_car0)
+
     # Test Case 6
     print("|=============== Test Case 6 ===============|")
-
+    # create FreightCar and Station objects
     freight_car = FreightCar(ID=0, currentStation=Station(ID=0, X=0, Y=0), totalWeightCapacity=10000,
                              maxNumberOfAllContainers=10, maxNumberOfHeavyContainers=5,
                              maxNumberOfRefrigeratedContainers=2, maxNumberOfLiquidContainers=2,
                              double_fuelConsumptionPerKM=0.1)
     destination_station = Station(ID=1, X=10, Y=10)
+
+    # calculate fuel consumption
     has_enough_fuel = freight_car.calculate_fuel_consumption(
         destination_station)
     print("[ Fuel Consumption : {0} ]".format(has_enough_fuel))
+
+    # move FreightCar to destination station
+    distance_to_destination = freight_car.currentStation.getDistance(
+        destination_station)
+    freight_car.frightcar_to_station(
+        destination_station, distance_to_destination)
+    print(freight_car)
+    print("Freight Reached Destination!!")
+
     # Test Case 7
     print("|=============== Test Case 7 ===============|")
 
