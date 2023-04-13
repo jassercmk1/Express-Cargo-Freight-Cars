@@ -1,5 +1,8 @@
+from station import Station
+
+
 class FreightCar:
-    def __init__(self, ID: int, currentStation, totalWeightCapacity: int,
+    def __init__(self, ID: int, currentStation: Station, totalWeightCapacity: int,
                  maxNumberOfAllContainers: int, maxNumberOfHeavyContainers: int,
                  maxNumberOfRefrigeratedContainers: int, maxNumberOfLiquidContainers: int,
                  double_fuelConsumptionPerKM: float):
@@ -19,9 +22,6 @@ class FreightCar:
 
     def getCurrentContainers(self):
         return sorted(self.containers, key=lambda container: container.ID)
-
-    def load_container(self):
-        pass
 
     def load_container(self, container):
         if container.ID != self.currentStation.ID:
@@ -52,7 +52,7 @@ class FreightCar:
         print(f"Container {container.ID} loaded into FreightCar {self.ID}.")
         return True
 
-    def unload_container(self, container_id: int, current_station: str):
+    def unload_container(self, container_id: int, current_station: Station):
         container = None
         for c in self.containers:
             if c.ID == container_id:
@@ -66,6 +66,9 @@ class FreightCar:
         self.containers.remove(container)
         container.station_id = current_station.ID
         current_station.containers.append(container)
+
+    def frightcar_to_station(self, station):
+        self.currentStation = station
 
     def calculate_fuel_consumption(self, destination_station):
         total_consumption = sum(container.double_consumption()
